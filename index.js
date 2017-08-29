@@ -9,7 +9,9 @@ app.get("/", async (req, res) => {
   if (filepath.endsWith("/")) filepath += "index.html";
   const buffer = await readFile("./static/" + filepath);
   const content = buffer.toString();
-  res.send(content);
+  const newContent = content.split(/(<sc-img[^>]+><\/sc-img>)/);
+  console.log(newContent);
+  res.send(newContent.join(""));
 });
 app.use(Express.static("static"));
 app.listen(8080);
