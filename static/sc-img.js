@@ -3,9 +3,14 @@ template.innerHTML = `
   <style>
     :host {
       display: block;
+      background-color: red;
+      position: relative;
     }
     img {
       width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
     }
   </style>
 `;

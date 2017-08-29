@@ -17,8 +17,11 @@ app.get("/", async (req, res) => {
       const img = im("./static/" + src);
       const sizeFunc = promisify(img.size.bind(img));
       const { width, height } = await sizeFunc();
-      console.log(width, height);
-      return item;
+
+      return item.replace(
+        `></sc-img>`,
+        `style="padding-top: ${height / width * 100}%;"></sc-img>`
+      );
     })
   );
   res.send(newContent.join(""));
