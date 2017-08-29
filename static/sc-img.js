@@ -5,6 +5,7 @@ template.innerHTML = `
       display: block;
       background-color: red;
       position: relative;
+      background-size: 100% 100%;
     }
     img {
       width: 100%;

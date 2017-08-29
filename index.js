@@ -5,6 +5,8 @@ const readFile = promisify(fs.readFile);
 const im = require("gm").subClass({ imageMagick: true });
 const app = Express();
 
+const thumbSize = 8;
+
 app.get("/", async (req, res) => {
   let filepath = req.url;
   if (filepath.endsWith("/")) filepath += "index.html";
@@ -17,10 +19,16 @@ app.get("/", async (req, res) => {
       const img = im("./static/" + src);
       const sizeFunc = promisify(img.size.bind(img));
       const { width, height } = await sizeFunc();
-
+      const thumbFunc = promisify(
+        img.resize(thumbSize, thumbSize).toBuffer.bind(img)
+      );
+      const thumb = await thumbFunc("PNG");
+      const thumbURL = `data:image/png;base64,${thumb.toString("base64")}`;
       return item.replace(
         `></sc-img>`,
-        `style="padding-top: ${height / width * 100}%;"></sc-img>`
+        `style="padding-top: ${height /
+          width *
+          100}%; background-image: url(${thumbURL});"></sc-img>`
       );
     })
   );
