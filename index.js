@@ -5,7 +5,7 @@ const readFile = promisify(fs.readFile);
 const im = require("gm").subClass({ imageMagick: true });
 const app = Express();
 
-const thumbSize = 8;
+const thumbSize = 16;
 
 app.get("/", async (req, res) => {
   let filepath = req.url;

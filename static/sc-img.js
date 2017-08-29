@@ -6,6 +6,7 @@ template.innerHTML = `
       background-color: red;
       position: relative;
       background-size: 100% 100%;
+      image-rendering: pixelated;
     }
     img {
       width: 100%;
